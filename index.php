@@ -19,6 +19,9 @@ if (isset($_POST["i"]) && !empty($_POST["i"])) {
 	$binary = file_get_contents($uriPhp);
 	//create name for the img, md5 works well
 	$n=md5($uri).".png";
+	if (!is_dir('i')) { //add directory i for images if needed
+	    mkdir('i', 0777, true);
+	}
 	file_put_contents("i/".$n, $binary);
 	if (!is_image("i/".$n)) { die("Not an image!"); unlink($n); }
 	//redirect to retrick to show more options
